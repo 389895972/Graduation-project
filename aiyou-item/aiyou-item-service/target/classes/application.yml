@@ -1,0 +1,31 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: item-service
+  datasource:
+    url: jdbc:mysql:///aiyou
+    username: root
+    password: 123456
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20086/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 5  #心跳时间
+    lease-expiration-duration-in-seconds: 15 #过期时间
+mybatis:
+  type-aliases-package: cn.aiyou.item.pojo
+logging:
+  level:
+    cn:
+      aiyou:
+        item:
+          mapper: DEBUG
+leyou:
+  jwt:
+    secret: leyou@Login(Auth}*^31)&heiMa% # 登录校验的密钥
+    pubKeyPath: F:\\idea\\aiyou\\rsa\\rsa.pub # 公钥地址
+    priKeyPath: F:\\idea\\aiyou\\rsa\\rsa.pri # 私钥地址
+    expire: 30 # 过期时间,单位分钟
+    cookiename: LY_TOKEN

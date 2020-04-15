@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="aiyou-user-service" />
+        <module name="aiyou-auth-service" />
+        <module name="aiyou-item-service" />
+        <module name="aiyou-register" />
+        <module name="aiyou-gateway" />
+        <module name="aiyou-common" />
+        <module name="aiyou-item-interface" />
+        <module name="aiyou-user-interface" />
+        <module name="aiyou-auth-common" />
+        <module name="aiyou-sms" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="aiyou" target="1.8" />
+      <module name="aiyou-auth" target="1.8" />
+      <module name="aiyou-auth-common" target="1.8" />
+      <module name="aiyou-auth-service" target="1.8" />
+      <module name="aiyou-common" target="1.8" />
+      <module name="aiyou-gateway" target="1.8" />
+      <module name="aiyou-item" target="1.8" />
+      <module name="aiyou-item-interface" target="1.8" />
+      <module name="aiyou-item-service" target="1.8" />
+      <module name="aiyou-register" target="1.8" />
+      <module name="aiyou-sms" target="1.8" />
+      <module name="aiyou-user" target="1.8" />
+      <module name="aiyou-user-interface" target="1.8" />
+      <module name="aiyou-user-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="aiyou-auth-common" options="-parameters" />
+      <module name="aiyou-auth-service" options="-parameters" />
+      <module name="aiyou-common" options="-parameters" />
+      <module name="aiyou-gateway" options="-parameters" />
+      <module name="aiyou-item-interface" options="-parameters" />
+      <module name="aiyou-item-service" options="-parameters" />
+      <module name="aiyou-register" options="-parameters" />
+      <module name="aiyou-sms" options="-parameters" />
+      <module name="aiyou-user-interface" options="-parameters" />
+      <module name="aiyou-user-service" options="-parameters" />
+    </option>
+  </component>
+</project>

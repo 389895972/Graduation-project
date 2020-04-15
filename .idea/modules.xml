@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/aiyou.iml" filepath="$PROJECT_DIR$/aiyou.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-auth/aiyou-auth.iml" filepath="$PROJECT_DIR$/aiyou-auth/aiyou-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-auth/aiyou-auth-common/aiyou-auth-common.iml" filepath="$PROJECT_DIR$/aiyou-auth/aiyou-auth-common/aiyou-auth-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-auth/aiyou-auth-service/aiyou-auth-service.iml" filepath="$PROJECT_DIR$/aiyou-auth/aiyou-auth-service/aiyou-auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-common/aiyou-common.iml" filepath="$PROJECT_DIR$/aiyou-common/aiyou-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-gateway/aiyou-gateway.iml" filepath="$PROJECT_DIR$/aiyou-gateway/aiyou-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-item/aiyou-item.iml" filepath="$PROJECT_DIR$/aiyou-item/aiyou-item.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-item/aiyou-item-interface/aiyou-item-interface.iml" filepath="$PROJECT_DIR$/aiyou-item/aiyou-item-interface/aiyou-item-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-item/aiyou-item-service/aiyou-item-service.iml" filepath="$PROJECT_DIR$/aiyou-item/aiyou-item-service/aiyou-item-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-register/aiyou-register.iml" filepath="$PROJECT_DIR$/aiyou-register/aiyou-register.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-sms/aiyou-sms.iml" filepath="$PROJECT_DIR$/aiyou-sms/aiyou-sms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-user/aiyou-user.iml" filepath="$PROJECT_DIR$/aiyou-user/aiyou-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-user/aiyou-user-interface/aiyou-user-interface.iml" filepath="$PROJECT_DIR$/aiyou-user/aiyou-user-interface/aiyou-user-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aiyou-user/aiyou-user-service/aiyou-user-service.iml" filepath="$PROJECT_DIR$/aiyou-user/aiyou-user-service/aiyou-user-service.iml" />
+    </modules>
+  </component>
+</project>
