@@ -34,7 +34,7 @@ public class OrderService {
     private FlightSeatMapper flightSeatMapper;
 
     @Transactional
-    public void insertOrder(List<OrderPassenger> orderPassengers, Long flightNo, Long userId, Long orderId, Integer pay) {
+    public String insertOrder(List<OrderPassenger> orderPassengers, Long flightNo, Long userId, Long orderId, Integer pay) {
         //获取座位号
         List<Integer> seats = new ArrayList<>(orderPassengers.size());
         int passengerNum = orderPassengers.size();
@@ -62,8 +62,7 @@ public class OrderService {
             }
         }
         if (seats.size() != orderPassengers.size()) {
-            //todo  余票不足
-            return;
+            return "订购失败，余票不足";
         }
 
         OrderPassenger orderPassenger = new OrderPassenger();
@@ -95,7 +94,7 @@ public class OrderService {
         order.setFromTime(flight_info1.getFromTime());
         order.setToTime(flight_info1.getToTime());
         this.orderMapper.insertSelective(order);
-
+        return "订购成功";
     }
 
     public List<Order> queryAllOrdersByUser(Long userId) {
