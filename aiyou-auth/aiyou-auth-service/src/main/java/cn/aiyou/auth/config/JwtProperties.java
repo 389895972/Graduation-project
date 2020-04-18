@@ -5,6 +5,7 @@ import cn.aiyou.common.utils.RsaUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -36,8 +37,8 @@ public class JwtProperties {
     @PostConstruct
     public void init(){
         try {
-            File pubKey = new File(pubKeyPath);
-            File priKey = new File(priKeyPath);
+            File pubKey = ResourceUtils.getFile(pubKeyPath);
+            File priKey = ResourceUtils.getFile(priKeyPath);
             if (!pubKey.exists() || !priKey.exists()) {
                 // 生成公钥和私钥
                 RsaUtils.generateKey(pubKeyPath, priKeyPath, secret);
@@ -50,7 +51,7 @@ public class JwtProperties {
             throw new RuntimeException();
         }
     }
-    
+
     // getter setter ...
 
     public String getSecret() {

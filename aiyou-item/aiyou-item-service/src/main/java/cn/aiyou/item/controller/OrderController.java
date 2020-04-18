@@ -58,9 +58,10 @@ public class OrderController {
             List<OrderPassenger> orderPassengers = JSONObject.parseArray(users.toJSONString(), OrderPassenger.class);
             //System.out.println(orderPassengers);
             int pay = Integer.parseInt(jsonObject.getString("pay"));
-            this.orderService.insertOrder(orderPassengers, flightNo, user.getId(), orderId, pay);
+            String res=this.orderService.insertOrder(orderPassengers, flightNo, user.getId(), orderId, pay);
 
-            return ResponseEntity.ok(new Result(false, 201, "用户信息错误", null));
+            return ResponseEntity.ok(new Result(true, 200, res, null));
+//            return ResponseEntity.ok(new Result(false, 201, "用户信息错误", null));
         } catch (Exception e) {
             e.printStackTrace();
         }

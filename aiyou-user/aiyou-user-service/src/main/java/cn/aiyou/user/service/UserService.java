@@ -141,6 +141,7 @@ public class UserService {
         User record=new User();
         record.setPhone(phone);
         User user = this.userMapper.selectOne(record);
+        System.out.println(user);
         //判断user 是否为空
 
         if(user==null){
@@ -154,6 +155,7 @@ public class UserService {
         if(StringUtils.equals(password,user.getPassword())){
             return user;
         }
+        System.out.println("3333333333333");
         return null;
     }
 

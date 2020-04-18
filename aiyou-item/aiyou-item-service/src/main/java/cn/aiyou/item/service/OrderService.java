@@ -34,7 +34,7 @@ public class OrderService {
     private FlightSeatMapper flightSeatMapper;
 
     @Transactional
-    public void insertOrder(List<OrderPassenger> orderPassengers, Long flightNo, Long userId, Long orderId, Integer pay) {
+    public String insertOrder(List<OrderPassenger> orderPassengers, Long flightNo, Long userId, Long orderId, Integer pay) {
         //获取座位号
         List<Integer> seats = new ArrayList<>(orderPassengers.size());
         int passengerNum = orderPassengers.size();
@@ -54,6 +54,7 @@ public class OrderService {
         Set<Integer> existSeats = flightSeats.stream().map(FlightSeat::getSeatNo).collect(Collectors.toSet());
         while (start_seat <= end_seat) {
             if (existSeats.contains(start_seat)) {
+                start_seat++;
                 continue;
             }
             seats.add(start_seat++);
@@ -62,9 +63,14 @@ public class OrderService {
             }
         }
         if (seats.size() != orderPassengers.size()) {
-            //todo  余票不足
-            return;
+            return "预订失败，余票不足。";
         }
+        FlightSeat flightSeat = new FlightSeat();
+        flightSeat.setFlightNo(flightNo);
+        seats.forEach(seatNo ->{
+            flightSeat.setSeatNo(seatNo);
+            flightSeatMapper.insert(flightSeat);
+        });
 
         OrderPassenger orderPassenger = new OrderPassenger();
         Order order = new Order();
@@ -95,7 +101,7 @@ public class OrderService {
         order.setFromTime(flight_info1.getFromTime());
         order.setToTime(flight_info1.getToTime());
         this.orderMapper.insertSelective(order);
-
+        return "预定成功";
     }
 
     public List<Order> queryAllOrdersByUser(Long userId) {
@@ -142,6 +148,7 @@ public class OrderService {
         flightSeat.setFlightNo(order.getFlightNo());
         flightSeat.setSeatNo(orderPassenger.getSeatNo());
         flightSeatMapper.delete(flightSeat);
+        orderPassengerMapper.delete(orderPassenger);
 
         if (orderPassengers.size() == 1) {
             orderMapper.delete(queryOrder);
@@ -149,7 +156,7 @@ public class OrderService {
         }
 
         Integer ticketPrice = order.getTicketPrice();
-        order.setTicketPrice((ticketPrice / orderPassengers.size()) * orderPassengers.size() - 1);
+        order.setTicketPrice((ticketPrice / orderPassengers.size()) * (orderPassengers.size() - 1));
         orderMapper.updateByPrimaryKeySelective(order);
         return true;
     }

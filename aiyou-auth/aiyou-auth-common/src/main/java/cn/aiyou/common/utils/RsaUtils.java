@@ -1,5 +1,7 @@
 package cn.aiyou.common.utils;
 
+import org.springframework.util.ResourceUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -81,11 +83,11 @@ public class RsaUtils {
     }
 
     private static byte[] readFile(String fileName) throws Exception {
-        return Files.readAllBytes(new File(fileName).toPath());
+        return Files.readAllBytes(ResourceUtils.getFile(fileName).toPath());
     }
 
     private static void writeFile(String destPath, byte[] bytes) throws IOException {
-        File dest = new File(destPath);
+        File dest = ResourceUtils.getFile(destPath);
         if (!dest.exists()) {
             dest.createNewFile();
         }

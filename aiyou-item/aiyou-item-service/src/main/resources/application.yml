@@ -7,6 +7,7 @@ spring:
     url: jdbc:mysql://47.96.165.193:3306/aiyou
     username: root
     password: YCH670989882@qq.com
+    driver-class-name: com.mysql.cj.jdbc.Driver
 eureka:
   client:
     service-url:
@@ -25,7 +26,7 @@ logging:
 leyou:
   jwt:
     secret: leyou@Login(Auth}*^31)&heiMa% # 登录校验的密钥
-    pubKeyPath: F:\\idea\\aiyou\\rsa\\rsa.pub # 公钥地址
-    priKeyPath: F:\\idea\\aiyou\\rsa\\rsa.pri # 私钥地址
-    expire: 30 # 过期时间,单位分钟
+    pubKeyPath: classpath:rsa.pub # 公钥地址
+    priKeyPath: classpath:rsa.pri # 私钥地址
+    expire: 360 # 过期时间,单位分钟
     cookiename: LY_TOKEN
