@@ -17,6 +17,7 @@ zuul:
   host:
     connect-timeout-millis: 6000
     socket-timeout-millis: 60000
+
 leyou:
   jwt:
     pubKeyPath: F:\\idea\\aiyou\\rsa\\rsa.pub # 公钥地址

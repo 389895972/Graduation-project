@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Table(name="tb_order_passenger")
 public class OrderPassenger implements Serializable {
     private static final long serialVersionUID = 650259031978044445L;
-    
+
     private Long orderId;
     /**
     * 乘客名字
@@ -30,6 +30,10 @@ public class OrderPassenger implements Serializable {
     * 表id
     */
     private Long id;
+    /**
+     *座位号
+     */
+    private Integer seatNo;
 
 
     public Long getOrderId() {
@@ -72,6 +76,14 @@ public class OrderPassenger implements Serializable {
         this.id = id;
     }
 
+    public Integer getSeatNo() {
+        return seatNo;
+    }
+
+    public void setSeatNo(Integer seatNo) {
+        this.seatNo = seatNo;
+    }
+
     @Override
     public String toString() {
         return "OrderPassenger{" +
@@ -80,6 +92,7 @@ public class OrderPassenger implements Serializable {
                 ", passengerTel='" + passengerTel + '\'' +
                 ", passengerIdcard='" + passengerIdcard + '\'' +
                 ", id=" + id +
+                ", seatNo=" + seatNo +
                 '}';
     }
 }

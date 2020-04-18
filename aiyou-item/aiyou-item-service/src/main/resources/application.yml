@@ -4,9 +4,9 @@ spring:
   application:
     name: item-service
   datasource:
-    url: jdbc:mysql:///aiyou
+    url: jdbc:mysql://47.96.165.193:3306/aiyou
     username: root
-    password: 123456
+    password: YCH670989882@qq.com
 eureka:
   client:
     service-url:
