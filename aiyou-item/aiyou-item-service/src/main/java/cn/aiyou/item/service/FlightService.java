@@ -38,6 +38,7 @@ public class FlightService {
         Example.Criteria criteria=example.createCriteria();
        // criteria.andEqualTo("fromCity",flight_info.getFromCity()).andEqualTo("toCity",flight_info.getToCity()).andEqualTo("flightDate",flight_info.getFlightDate());
        criteria.andEqualTo("fromCity",flight_info.getFromCity()).andEqualTo("toCity",flight_info.getToCity()).andEqualTo("flightDate",flight_info.getFlightDate());
+       // List<Flight_Info1> flight_info1s = this.flightMapper.selectByExample(example);
         List<Flight_Info1> flight_info1s = this.flightMapper.selectByExample(example);
        PageInfo<Flight_Info1> result=new PageInfo<>(flight_info1s);
 //       result.setList(flight_info1s);

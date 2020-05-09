@@ -8,16 +8,18 @@ import cn.aiyou.item.pojo.FlightSeat;
 import cn.aiyou.item.pojo.Flight_Info1;
 import cn.aiyou.item.pojo.Order;
 import cn.aiyou.item.pojo.OrderPassenger;
+import cn.aiyou.item.utils.HttpClient;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.github.wxpay.sdk.WXPayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class OrderService {
@@ -51,6 +53,8 @@ public class OrderService {
         FlightSeat queryFlightSeat = new FlightSeat();
         queryFlightSeat.setFlightNo(flightNo);
         List<FlightSeat> flightSeats = flightSeatMapper.select(queryFlightSeat);
+
+
         Set<Integer> existSeats = flightSeats.stream().map(FlightSeat::getSeatNo).collect(Collectors.toSet());
         while (start_seat <= end_seat) {
             if (existSeats.contains(start_seat)) {
@@ -115,12 +119,15 @@ public class OrderService {
         OrderPassenger orderPassenger = new OrderPassenger();
         orderPassenger.setOrderId(orderId);
         List<OrderPassenger> select = this.orderPassengerMapper.select(orderPassenger);
-        List<String> list = new ArrayList<>();
+       // List<String> list = new ArrayList<>();
+        Map<String,Integer> map=new HashMap<>();
         select.forEach(pass -> {
-            list.add(pass.getPassengerName());
+           // list.add(pass.getPassengerName());
+            map.put(pass.getPassengerName(),pass.getSeatNo());
+
         });
         Order order = this.orderMapper.selectByPrimaryKey(orderId);
-        order.setPassengers(list);
+        order.setPassengers(map);
         return order;
     }
 
@@ -159,5 +166,62 @@ public class OrderService {
         order.setTicketPrice((ticketPrice / orderPassengers.size()) * (orderPassengers.size() - 1));
         orderMapper.updateByPrimaryKeySelective(order);
         return true;
+    }
+
+    public Map createNative(String orderNo) {
+        try {
+            //根据订单id获取订单信息
+//            QueryWrapper<Order> wrapper = new QueryWrapper<>();
+//            wrapper.eq("order_no",orderNo);
+//            Order order = orderService.getOne(wrapper);
+            Order order1=new Order();
+            order1.setOrderId( Long.valueOf(orderNo));
+            BigDecimal bigDecimal=new BigDecimal("0.01");
+            Order order = orderMapper.selectOne(order1);
+            Map m = new HashMap();
+            //1、设置支付参数
+            m.put("appid", "wx74862e0dfcf69954");
+            m.put("mch_id", "1558950191");
+            m.put("nonce_str", WXPayUtil.generateNonceStr());
+            m.put("body",String.valueOf(order.getFlightNo()) );
+            m.put("out_trade_no", orderNo);
+            m.put("total_fee",bigDecimal.multiply(new BigDecimal("100")).longValue()+"");
+            m.put("spbill_create_ip", "127.0.0.1");
+            m.put("notify_url", "http://guli.shop/api/order/weixinPay/weixinNotify\n");
+            m.put("trade_type", "NATIVE");
+            //2、HTTPClient来根据URL访问第三方接口并且传递参数
+
+            HttpClient client = new HttpClient("https://api.mch.weixin.qq.com/pay/unifiedorder");
+
+            //client设置参数
+
+            client.setXmlParam(WXPayUtil.generateSignedXml(m, "T6m9iK73b0kn9g5v426MKfHQH7X8rKwb"));
+            client.setHttps(true);
+            client.post();
+            //3、返回第三方的数据
+            String xml = client.getContent();
+            Map<String, String> resultMap = WXPayUtil.xmlToMap(xml);
+            System.out.println(resultMap);
+            //4、封装返回结果集
+
+            System.out.println(bigDecimal);
+            Map map = new HashMap<>();
+            map.put("out_trade_no", orderNo);
+            //map.put("course_id", order.getCourseId());
+           map.put("total_fee",bigDecimal.multiply(new BigDecimal("100")).longValue()+"");
+            //map.put("total_fee", 2000011900);
+            map.put("result_code", resultMap.get("result_code"));
+            map.put("code_url", resultMap.get("code_url"));
+            //微信支付二维码2小时过期，可采取2小时未支付取消订单
+            //redisTemplate.opsForValue().set(orderNo, map, 120, TimeUnit.MINUTES);
+            return map;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+             return new HashMap<>();
+
+        }
+
     }
 }

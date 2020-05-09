@@ -52,8 +52,8 @@ public class FlightController {
         flight_info.setFlightDate(date);
        PageInfo<Flight_Info1> flight_infos = this.flightService.queryFlights(flight_info,page);
 
-      //  return  ResponseEntity.ok(new Result(true,200,"查询成功",flight_infos));
-        return  ResponseEntity.ok(flight_infos);
+      // return  ResponseEntity.ok(new Result(true,200,"查询成功",flight_infos));
+       return  ResponseEntity.ok(flight_infos);
     }
 
 

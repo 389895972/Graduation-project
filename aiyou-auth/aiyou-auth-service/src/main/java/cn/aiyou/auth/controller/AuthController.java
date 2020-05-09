@@ -49,8 +49,8 @@ public class AuthController {
     public ResponseEntity<String> accredit(
             @RequestParam("phone")String phone,
             @RequestParam("password")String password
-
     ){
+
         String token= this.authService.accredit(phone,password);
         if(StringUtils.isBlank(token)){
             return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

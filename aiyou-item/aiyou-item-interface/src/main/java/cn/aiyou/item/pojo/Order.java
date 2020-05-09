@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (TbOrder)实体类
@@ -30,16 +31,18 @@ public class Order implements Serializable {
     
     private Integer ticketPrice;
 
+//    @Transient
+//    private List<String> passengers;
+
     @Transient
-    private List<String> passengers;
+    private Map<String,Integer> passengers;
+//    public List<String> getPassengers() {
+//        return passengers;
+//    }
 
-    public List<String> getPassengers() {
-        return passengers;
-    }
-
-    public void setPassengers(List<String> passengers) {
-        this.passengers = passengers;
-    }
+//    public void setPassengers(List<String> passengers) {
+//        this.passengers = passengers;
+//    }
 
     // @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date flightDate;
@@ -116,6 +119,14 @@ public class Order implements Serializable {
 
     public void setTicketPrice(Integer ticketPrice) {
         this.ticketPrice = ticketPrice;
+    }
+
+    public Map<String, Integer> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(Map<String, Integer> passengers) {
+        this.passengers = passengers;
     }
 
     public Long getFlightNo() {

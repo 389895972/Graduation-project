@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 //import net.minidev.json.JSONObject;
 
@@ -118,4 +119,12 @@ public class OrderController {
         System.out.println(orderId);
         return orderId;
     }
+
+    //生成二维码
+    @GetMapping("createNative/{orderNo}")
+    public ResponseEntity<Map> createNative(@PathVariable String orderNo){
+        Map map= orderService.createNative(orderNo);
+        return ResponseEntity.ok(map);
+    }
+
 }

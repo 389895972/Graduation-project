@@ -4,9 +4,11 @@ spring:
   application:
     name: item-service
   datasource:
-    url: jdbc:mysql://47.96.165.193:3306/aiyou
+    url: jdbc:mysql:///aiyou?serverTimezone=GMT%2B8
+    # url: jdbc:mysql://47.96.165.193:3306/aiyou
     username: root
-    password: YCH670989882@qq.com
+    password: 123456
+    #password: YCH670989882@qq.com
     driver-class-name: com.mysql.cj.jdbc.Driver
 eureka:
   client:
@@ -30,3 +32,6 @@ leyou:
     priKeyPath: classpath:rsa.pri # 私钥地址
     expire: 360 # 过期时间,单位分钟
     cookiename: LY_TOKEN
+ribbon:
+  eureka:
+    enabled: true

@@ -5,8 +5,10 @@ spring:
     name: user-service
   datasource:
     url: jdbc:mysql://47.96.165.193:3306/aiyou?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+   # url: jdbc:mysql:///aiyou?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
     password: YCH670989882@qq.com
+   # password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     host: 47.96.165.193
@@ -16,6 +18,12 @@ spring:
     virtual-host: /leyou
     username: leyou
     password: leyou
+logging:
+  level:
+    cn:
+      aiyou:
+        user:
+          mapper: DEBUG
 eureka:
   client:
     service-url:

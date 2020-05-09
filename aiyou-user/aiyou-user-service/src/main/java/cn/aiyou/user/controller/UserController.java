@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.DocFlavor;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -119,10 +120,18 @@ public class UserController {
     @GetMapping("query")
     public ResponseEntity<User> queryUser(@RequestParam("phone")String phone,@RequestParam("password")String password){
         User user=this.userService.queryUser(phone,password);
+        System.out.println("1111111"+phone);
+        System.out.println("22222"+password);
+        System.out.println(user);
         if(user==null){
+            System.out.println(9999999);
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(user);
     }
-
+    @GetMapping("queryAllUser/{page}")
+    public ResponseEntity<List<User>> queryAllUser(@PathVariable int page){
+        List<User> users= this.userService.queryAllUser(page);
+        return ResponseEntity.ok(users);
+    }
 }

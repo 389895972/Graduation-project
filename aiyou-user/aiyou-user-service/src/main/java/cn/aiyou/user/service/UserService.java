@@ -10,10 +10,11 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-
+import com.github.pagehelper.PageHelper;
 import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -143,8 +144,8 @@ public class UserService {
         User user = this.userMapper.selectOne(record);
         System.out.println(user);
         //判断user 是否为空
-
         if(user==null){
+            System.out.println("3333333333333");
             return null;
         }
 
@@ -155,8 +156,13 @@ public class UserService {
         if(StringUtils.equals(password,user.getPassword())){
             return user;
         }
-        System.out.println("3333333333333");
+
         return null;
     }
 
+    public List<User> queryAllUser(int page) {
+        PageHelper.startPage(page,10);
+        List<User> users = this.userMapper.selectAll();
+        return users;
+    }
 }
