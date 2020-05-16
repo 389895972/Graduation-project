@@ -9,7 +9,6 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan("cn.aiyou.item.mapper")
-
 public class AiyouItemApplication {
     public static void main(String[] args) {
         SpringApplication.run(AiyouItemApplication.class);
