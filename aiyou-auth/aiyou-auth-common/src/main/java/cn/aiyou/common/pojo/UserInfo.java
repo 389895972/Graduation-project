@@ -7,6 +7,7 @@ public class UserInfo {
 
     private Long id;
 
+
     private String username;
 
     public UserInfo() {
