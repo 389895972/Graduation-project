@@ -1,27 +1,28 @@
 package cn.aiyou.item.controller;
 
-import cn.aiyou.common.entity.PageResult;
+//import cn.aiyou.common.entity.PageResult;
 import cn.aiyou.common.entity.Result;
 import cn.aiyou.item.pojo.Flight_Info1;
 
 import cn.aiyou.item.service.FlightService;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.regexp.internal.RE;
+//import com.sun.org.apache.regexp.internal.RE;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.DateFormat;
+//import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
+//import java.text.SimpleDateFormat;
+//import java.util.List;
 
 @Controller
 @Api(tags = "航班管理相关接口")

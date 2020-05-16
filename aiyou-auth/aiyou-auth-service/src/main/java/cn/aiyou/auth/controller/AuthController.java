@@ -4,7 +4,7 @@ import cn.aiyou.auth.client.UserClient;
 import cn.aiyou.auth.client.UserClient1;
 import cn.aiyou.auth.config.JwtProperties;
 import cn.aiyou.auth.service.AuthService;
-import cn.aiyou.common.utils.CookieUtils;
+
 import cn.aiyou.common.utils.JwtUtils;
 import cn.aiyou.user.pojo.User;
 import net.minidev.json.JSONObject;

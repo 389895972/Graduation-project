@@ -1,12 +1,13 @@
 package cn.aiyou.item.service;
 
-import cn.aiyou.common.entity.PageResult;
+
 import cn.aiyou.item.mapper.FlightMapper;
 
 import cn.aiyou.item.pojo.Flight_Info1;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
