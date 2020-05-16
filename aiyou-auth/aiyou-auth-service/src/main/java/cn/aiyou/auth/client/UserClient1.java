@@ -11,5 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserClient1 {
 
     @GetMapping("query")
-    public User queryUser(@RequestParam("phone")String phone, @RequestParam("password")String password);
+     User queryUser(@RequestParam("phone")String phone, @RequestParam("password")String password);
+
+    @GetMapping("personGetUser")
+    User getUser(@RequestParam("id") Long id);
 }

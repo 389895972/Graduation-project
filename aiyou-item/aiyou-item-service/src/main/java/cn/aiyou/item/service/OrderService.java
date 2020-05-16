@@ -224,4 +224,22 @@ public class OrderService {
         }
 
     }
+
+
+    @Transactional
+    public Boolean deleteTicket(Long flightNo, int seatNo,Long orderId) {
+        OrderPassenger orderPassenger=new OrderPassenger();
+        orderPassenger.setOrderId(orderId);
+        orderPassenger.setSeatNo(seatNo);
+        int delete1 = this.orderPassengerMapper.delete(orderPassenger);
+        FlightSeat flightSeat=new FlightSeat();
+        flightSeat.setFlightNo(flightNo);
+        flightSeat.setSeatNo(seatNo);
+        int delete = this.flightSeatMapper.delete(flightSeat);
+        if(delete==1&&delete1==1){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

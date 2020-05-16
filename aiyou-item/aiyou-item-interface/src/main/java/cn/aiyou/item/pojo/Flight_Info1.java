@@ -1,7 +1,9 @@
 package cn.aiyou.item.pojo;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.format.annotation.DateTimeFormat;
+import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

@@ -127,4 +127,10 @@ public class OrderController {
         return ResponseEntity.ok(map);
     }
 
+    @GetMapping("deleteTicket/{flightNo}/{seatNo}/{orderId}")
+    public ResponseEntity<Boolean> deleteTicket(@PathVariable Long flightNo,@PathVariable int seatNo,@PathVariable Long orderId){
+        Boolean bool=orderService.deleteTicket(flightNo,seatNo,orderId);
+        return ResponseEntity.ok(bool);
+    }
+
 }

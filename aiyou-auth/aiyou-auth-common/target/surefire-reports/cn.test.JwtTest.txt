@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: cn.test.JwtTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.073 s <<< FAILURE! - in cn.test.JwtTest
+testParseToken(cn.test.JwtTest)  Time elapsed: 0.017 s  <<< ERROR!
+java.nio.file.NoSuchFileException: F:\idea\aiyou\rsa\rsa.pub
+	at cn.test.JwtTest.testGetRsa(JwtTest.java:29)
+
+testRsa(cn.test.JwtTest)  Time elapsed: 0 s  <<< ERROR!
+java.nio.file.NoSuchFileException: F:\idea\aiyou\rsa\rsa.pub
+	at cn.test.JwtTest.testGetRsa(JwtTest.java:29)
+
+testGenerateToken(cn.test.JwtTest)  Time elapsed: 0 s  <<< ERROR!
+java.nio.file.NoSuchFileException: F:\idea\aiyou\rsa\rsa.pub
+	at cn.test.JwtTest.testGetRsa(JwtTest.java:29)
+

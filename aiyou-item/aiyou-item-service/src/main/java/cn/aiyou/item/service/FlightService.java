@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -33,14 +34,17 @@ public class FlightService {
 //        result.setFromCity(flight_info.getFromCity());
 //        result.setToCity(flight_info.getToCity());
 //        result.setFlightDate(flight_info.getFlightDate());
-        PageHelper.startPage(page,10);
+       // PageHelper.startPage(page,10);
+        System.out.println(flight_info.getFlightDate().getTime());
         Example example=new Example(Flight_Info1.class);
         Example.Criteria criteria=example.createCriteria();
-       // criteria.andEqualTo("fromCity",flight_info.getFromCity()).andEqualTo("toCity",flight_info.getToCity()).andEqualTo("flightDate",flight_info.getFlightDate());
-       criteria.andEqualTo("fromCity",flight_info.getFromCity()).andEqualTo("toCity",flight_info.getToCity()).andEqualTo("flightDate",flight_info.getFlightDate());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        // criteria.andEqualTo("fromCity",flight_info.getFromCity()).andEqualTo("toCity",flight_info.getToCity()).andEqualTo("flightDate",flight_info.getFlightDate());
+       criteria.andEqualTo("fromCity",flight_info.getFromCity()).andEqualTo("toCity",flight_info.getToCity()).andEqualTo("flightDate",simpleDateFormat.format(flight_info.getFlightDate()));
+//       criteria.andEqualTo("fromCity",flight_info.getFromCity()).andEqualTo("toCity",flight_info.getToCity()).andEqualTo("flightDate",flight_info.getFlightDate());
        // List<Flight_Info1> flight_info1s = this.flightMapper.selectByExample(example);
         List<Flight_Info1> flight_info1s = this.flightMapper.selectByExample(example);
-       PageInfo<Flight_Info1> result=new PageInfo<>(flight_info1s);
+        PageInfo<Flight_Info1> result=new PageInfo<>(flight_info1s);
 //       result.setList(flight_info1s);
 //       // result.setItems(flight_info1s);
 //        System.out.println(result.getTotal());

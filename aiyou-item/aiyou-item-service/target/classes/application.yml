@@ -4,12 +4,14 @@ spring:
   application:
     name: item-service
   datasource:
-    url: jdbc:mysql:///aiyou?serverTimezone=GMT%2B8
-    # url: jdbc:mysql://47.96.165.193:3306/aiyou
+    #url: jdbc:mysql:///aiyou?serverTimezone=GMT%2B8
+    url: jdbc:mysql://47.96.165.193:3306/aiyou
     username: root
-    password: 123456
-    #password: YCH670989882@qq.com
+    #password: 123456
+    password: YCH670989882@qq.com
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    time-zone: GMT+8
 eureka:
   client:
     service-url:

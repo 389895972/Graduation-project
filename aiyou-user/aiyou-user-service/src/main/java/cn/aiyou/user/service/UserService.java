@@ -94,9 +94,6 @@ public class UserService {
         System.out.println("phone"+user.getPhone());
         String redisCode= this.redisTemplate.opsForValue().get(KEY_PREFIX + user.getPhone());
         //校验验证码
-//        System.out.println(11111111);
-//        System.out.println(user.getPhone());
-//        System.out.println(redisCode);
         if(!StringUtils.equals(code,redisCode))  {
            System.out.println(222);
           return new Result(false,201,"验证码错误",null);
@@ -164,5 +161,60 @@ public class UserService {
         PageHelper.startPage(page,10);
         List<User> users = this.userMapper.selectAll();
         return users;
+    }
+
+    public User queryUserInfo(Long id) {
+        User user = this.userMapper.selectByPrimaryKey(id);
+        System.out.println(8888888+user.getIdcard());
+        return user;
+    }
+
+
+    public Integer modifyUser(Long id,String name, String name1) {
+        User u =new User();
+        u.setId(id);
+        if("username".equals(name1)){
+            u.setUsername(name);
+          return   this.userMapper.updateByPrimaryKeySelective(u);
+        }
+        if("name".equals(name1)){
+            u.setName(name);
+            return   this.userMapper.updateByPrimaryKeySelective(u);
+        }
+        if("idcard".equals(name1)){
+            u.setIdcard(name);
+            return  this.userMapper.updateByPrimaryKeySelective(u);
+        }
+        if("phone".equals(name1)){
+            u.setPhone(name);
+            return   this.userMapper.updateByPrimaryKeySelective(u);
+        }
+
+       return 0;
+    }
+
+    public Integer modifyPwd(Long id, String oldPwd, String newPwd) {
+        User record=new User();
+        record.setId(id);
+
+        User user = this.userMapper.selectOne(record);
+
+        //判断user 是否为空
+        if(user==null){
+            return 0;
+        }
+        System.out.println("旧密码"+oldPwd);
+        System.out.println("新密码"+newPwd);
+        //获取盐，对用户输入密码加盐加密
+        oldPwd=CodecUtils.md5Hex(oldPwd,user.getSalt());
+
+        //和数据库密码比较
+        if(StringUtils.equals(oldPwd,user.getPassword())){
+            newPwd=CodecUtils.md5Hex(newPwd,user.getSalt());
+            user.setPassword(newPwd);
+            return this.userMapper.updateByPrimaryKey(user);
+
+        }
+          return 0;
     }
 }

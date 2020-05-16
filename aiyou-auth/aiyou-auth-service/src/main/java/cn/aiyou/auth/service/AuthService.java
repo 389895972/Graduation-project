@@ -41,4 +41,10 @@ public class AuthService {
         }
         return  null;
     }
+
+    public User queryUser(Long id) {
+       return this.userClient1.getUser(id);
+    }
+
+
 }

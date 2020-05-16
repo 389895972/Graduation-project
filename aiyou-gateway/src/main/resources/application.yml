@@ -15,8 +15,8 @@ zuul:
     user-service: /user/**
     auth-service: /auth/**
   host:
-    connect-timeout-millis: 15000
-    socket-timeout-millis: 60000
+    connect-timeout-millis: 150000
+    socket-timeout-millis: 600000
 leyou:
   jwt:
     pubKeyPath: F:\\idea\\aiyou\\rsa\\rsa.pub # 公钥地址
@@ -30,5 +30,5 @@ leyou:
       - /api/user/code
       - /api/item
 ribbon:
-  ReadTimeout: 10000  #请求处理的超时时间
-  ConnectTimeout: 10000  #请求连接的超时时间
+  ReadTimeout: 100000  #请求处理的超时时间
+  ConnectTimeout: 100000  #请求连接的超时时间

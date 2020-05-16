@@ -5,6 +5,7 @@ import cn.aiyou.user.pojo.User;
 import cn.aiyou.user.service.UserService;
 
 import net.minidev.json.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,14 +51,9 @@ public class UserController {
 //        return ResponseEntity.status(HttpStatus.CREATED).build();
 //    }
 
+    //用户注册
     @PostMapping("register/{code}")
     public ResponseEntity<Result> register(@RequestBody User user, @PathVariable("code")String code){
-        System.out.println(222);
-        System.out.println(user.getUsername());
-        System.out.println(user.getName());
-        System.out.println(user.getPassword());
-        System.out.println(user.getPhone());
-
         Boolean bool=this.userService.checkUser(user.getPhone(),2);
         if(!bool){
             return ResponseEntity.ok(new Result(false,201,"手机号已注册",null));
@@ -133,5 +129,54 @@ public class UserController {
     public ResponseEntity<List<User>> queryAllUser(@PathVariable int page){
         List<User> users= this.userService.queryAllUser(page);
         return ResponseEntity.ok(users);
+    }
+
+
+    @GetMapping("personGetUser")
+    @ResponseBody
+    public User getUser(@RequestParam("id") Long id){
+           User user=this.userService.queryUserInfo(id);
+           return user;
+    }
+
+
+    @GetMapping("updatePwd")
+    @ResponseBody
+    public  ResponseEntity<Integer>  modifyPwd(
+            @RequestParam("id") Long id,
+            @RequestParam(value = "oldPwd",required =false) String oldPwd,
+            @RequestParam(value = "newPwd",required =false) String newPwd
+    ){
+      Integer i=this.userService.modifyPwd(id,oldPwd,newPwd);
+        return ResponseEntity.ok(i);
+    }
+
+    @GetMapping("modifyUser")
+    public  ResponseEntity<Integer>  modifyUser(
+            @RequestParam("id") Long id,
+            @RequestParam(value = "username",required =false) String username,
+            @RequestParam(value = "name",required =false) String name,
+            @RequestParam(value = "idcard",required =false) String idcard,
+            @RequestParam(value = "phone",required =false) String phone
+    ){
+       if(!StringUtils.isEmpty(username)){
+         Integer flag= this.userService.modifyUser(id,username,"username");
+           System.out.println(username);
+         return ResponseEntity.ok(flag);
+       }
+        if(!StringUtils.isEmpty(name)){
+            System.out.println(name);
+            Integer flag= this.userService.modifyUser(id,name,"name");
+            return ResponseEntity.ok(flag);
+        }
+        if(!StringUtils.isEmpty(idcard)){
+            Integer flag= this.userService.modifyUser(id,idcard,"idcard");
+            return ResponseEntity.ok(flag);
+        }
+        if(!StringUtils.isEmpty(phone)){
+            Integer flag= this.userService.modifyUser(id,phone,"phone");
+            return ResponseEntity.ok(flag);
+        }
+        return ResponseEntity.ok(0);
     }
 }
